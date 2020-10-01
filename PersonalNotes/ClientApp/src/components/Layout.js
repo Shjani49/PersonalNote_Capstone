@@ -10,6 +10,7 @@ export class Layout extends Component {
     render() {
         return (
             <div>
+
                 <Header/>
                 <NavMenu />
                 <Container>
