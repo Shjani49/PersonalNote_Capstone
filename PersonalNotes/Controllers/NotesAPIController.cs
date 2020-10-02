@@ -22,7 +22,7 @@ namespace PersonalNotes.Controllers
         }
 
         [HttpPost("CreateNotes")]
-        public ActionResult<Notes> CreeteNote(string description, string date)
+        public ActionResult<Notes> CreateNote(string description, string date)
         {
             ActionResult<Notes> response;
             Notes created;
@@ -39,7 +39,7 @@ namespace PersonalNotes.Controllers
             }
             catch (Exception e)
             {
-                response = StatusCode(403, new { error = e.Message }); ;
+                response = StatusCode(403, new { error = e.Message }); 
             }
 
 

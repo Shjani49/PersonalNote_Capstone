@@ -50,7 +50,7 @@ namespace PersonalNotes.Controllers
                 {
                     if (dateParsed > DateTime.Today)
                     {
-                        throw new ArgumentException("Date can not be in past.", nameof(date));
+                        throw new ArgumentException("Date can not be in Future.", nameof(date));
                     }
                 }
             }
