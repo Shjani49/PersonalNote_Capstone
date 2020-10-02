@@ -20,5 +20,26 @@ namespace PersonalNotes.Controllers
             // Return the response.
             return new NotesController().GetNotes();
         }
+
+        [HttpPost("CreateNotes")]
+
+        public ActionResult<Notes> CreateNotes(string description, string date)
+        {
+            ActionResult<Notes> response;
+            Notes created;
+            try
+            {
+                // We aren't concerned with validation here. Only in BLL.
+                created = new NotesController().CreateNotes(description, date);
+                // Encode our created object as JSON and bounce it back with the request.
+                response = Ok(created);
+            }
+            catch (Exception e)
+            {
+                response = UnprocessableEntity(new { error = e.Message });
+            }
+            // Return the response.
+            return response;
+        }
     }
 }
