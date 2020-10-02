@@ -25,7 +25,7 @@ export class ReadNotes extends Component {
          this.setState({ forecasts: data, loading: false });
          */
         // Axios replaces fetch(), same concept. Send the response and "then" when it comes back, put it in the state.
-        axios.get('API/Notes/AllNotes').then(res => {
+        axios.get('API/NotesAPI/AllNotes').then(res => {
             this.setState({ notes: res.data, loading: false });
         });
     }
@@ -48,8 +48,7 @@ export class ReadNotes extends Component {
         return (
             <div>
                 <div>{notes.map(note =>
-                    <p key={note.id}>
-                        <p>{note.id}</p>
+                    <p key={note.id}>                      
                         <p>{note.description}</p>
                         <p>{note.date}</p>
                      </p>                     
