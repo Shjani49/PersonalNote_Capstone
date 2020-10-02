@@ -20,51 +20,54 @@ namespace PersonalNotes.Controllers
             return notes;
         }
 
+
         public Notes CreateNotes(string description, string date)
         {
-          /*  DateTime dateParsed = new DateTime();*/
-           
+
+            DateTime dateParsed;
+
             if (string.IsNullOrWhiteSpace(description))
             {
-                throw new ArgumentNullException(nameof(description), "Notes was not provided.");
+                throw new ArgumentNullException(nameof(description), "Note Description was not provided.");
             }
             else
             {
                 description = description.Trim();
             }
+
             if (string.IsNullOrWhiteSpace(date))
             {
                 throw new ArgumentNullException(nameof(date), "Date was not provided.");
             }
-            /*else
+            else
             {
                 date = date.Trim();
                 if (!DateTime.TryParse(date, out dateParsed))
                 {
-                    throw new Exception("Date is not valid.");
+                    throw new ArgumentException("Date is not valid.", nameof(date));
                 }
                 else
                 {
                     if (dateParsed > DateTime.Today)
                     {
-                        throw new Exception("Date cannot be in future.");
+                        throw new ArgumentException("Date can not be in past.", nameof(date));
                     }
-                   
                 }
+            }
 
-            }*/
-            Notes created = new Notes()
+            Notes newNote = new Notes()
             {
                 Description = description,
-                Date = DateTime.Parse(date)
-              
+                Date = dateParsed
             };
+
             using (NoteContext context = new NoteContext())
             {
-                context.Notes.Add(created);
+                context.Notes.Add(newNote);
                 context.SaveChanges();
             }
-            return created;
+
+            return newNote;
         }
     }
 }

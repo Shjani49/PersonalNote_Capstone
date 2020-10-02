@@ -22,15 +22,14 @@ namespace PersonalNotes.Controllers
         }
 
         [HttpPost("CreateNotes")]
-
-        public ActionResult<Notes> CreateNotes(string description, string date)
+        public ActionResult<Notes> AddProduct(string description, string date)
         {
             ActionResult<Notes> response;
             Notes created;
             try
             {
                 // We aren't concerned with validation here. Only in BLL.
-                created = new NotesController().CreateNotes(description, date);
+                created = new NotesController().CreateNotes(description,date);
                 // Encode our created object as JSON and bounce it back with the request.
                 response = Ok(created);
             }
@@ -38,8 +37,12 @@ namespace PersonalNotes.Controllers
             {
                 response = UnprocessableEntity(new { error = e.Message });
             }
+
             // Return the response.
             return response;
         }
+
+
+
     }
 }

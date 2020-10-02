@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-
 // Don't forget to "npm install axios" and import it on any pages from which you are making HTTP requests.
 import axios from 'axios';
 
+// The name of the class is used in routing in App.js. The name of the file is not important in that sense.
 export class CreateNotes extends Component {
     static displayName = CreateNotes.name;
 
@@ -23,9 +23,11 @@ export class CreateNotes extends Component {
             case "date":
                 this.setState({ date: event.target.value });
                 break;
-
         }
+
     }
+
+
     // Either way we render the title, and a description.
     render() {
         return (
@@ -38,25 +40,31 @@ export class CreateNotes extends Component {
                     <br />
                     <label htmlfor="date">Date:</label>
                     <input id="date" type="text" value={this.state.date} onChange={this.handleChange} />
+                   
                     <br />
-
                     <input type="submit" value="Submit" />
                 </form>
             </div>
         );
     }
 
+
     async handleSubmit(event) {
         event.preventDefault();
         this.setState({ waiting: true });
+        // Axios replaces fetch(), same concept. Send the response and "then" when it comes back, put it in the state.
 
+        /*
+        axios.post(`person/api/create?firstName=${this.state.firstName}&lastname=${this.state.lastName}&phone=${this.state.phone}`).then(res => {
+            this.setState({ statusCode: res.status, response: res.data, loading: false });
+        });
+        */
         axios({
             method: 'post',
             url: 'API/NotesAPI/CreateNotes',
             params: {
-                description: this.state.description,
-                date: this.state.date
-
+              description: this.state.description,
+                date: this.state.date,
             }
         })
             .then((res) => {
